@@ -10,13 +10,16 @@ bool deleteStudent(student *&first, student *&endp, long long target) {
     student *prevp = NULL, *p = first;
     while (p != NULL) {
         if (p->id == target) {
+            /* Case 1: The node to delete is the first node (head) */
             if (prevp == NULL) first = p->next;
+            /* Case 2: The node to delete is in the middle or at the end */
             else prevp->next = p->next;
-
+            /* Update the endp (tail) pointer if the last node was removed */
             if (p == endp) endp = prevp;
             delete p;
             return true;
         }
+        /* Move pointers forward: current becomes previous, move to next node */
         prevp = p;
         p = p->next;
     }
